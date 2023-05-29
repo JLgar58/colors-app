@@ -1,34 +1,30 @@
 import React, { useState, useEffect } from "react";
+
+// external imports
 import { Routes, Route, useParams, useLocation } from "react-router-dom";
-import { generatePalette } from "./utils/colorHelpers";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import SingleColorPalette from "./components/SingleColorPalette";
-import Palette from "./components/Palette";
-import Home from "./components/Home";
+
+// helpers
+import { generatePalette } from "./utils/colorHelpers";
 import seedColors from "./seeds/seedColors";
+
+// component imports
+import Home from "./components/Home";
+import Palette from "./components/Palette";
+import SingleColorPalette from "./components/SingleColorPalette";
 import NewPaletteForm from "./components/create/NewPaletteForm";
 
+// css imports
 import "./css/App.css";
 import "./css/page.css";
 
 function App() {
   // init
+  const location = useLocation();
   const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
   const [palettes, setPalette] = useState(savedPalettes || seedColors);
 
   // fn
-  // function syncLocalStorage() {
-  //   // window.localStorage.setItem(
-  //   //   "palettes",
-  //   //   JSON.stringify(palettes.paletteArray)
-  //   // );
-  //   if (JSON.parse(window.localStorage.getItem("palettes")).lenght <= 0) {
-  //     setPalette((st) => [seedColors]);
-  //     window.localStorage.setItem("palettes", JSON.stringify(palettes));
-  //   } else {
-  //     JSON.parse(window.localStorage.getItem("palettes"));
-  //   }
-  // }
   const savePalette = (newPalette) => {
     return setPalette((st) => [...st, newPalette]);
   };
@@ -57,10 +53,8 @@ function App() {
     return <section className="page">{children}</section>;
   };
 
-  const location = useLocation();
   // render
   return (
-    // <div className="App">
     <TransitionGroup className="App" location={location}>
       <CSSTransition key={location.key} classNames="page" timeout={500}>
         <Routes location={location}>
@@ -111,7 +105,6 @@ function App() {
         </Routes>
       </CSSTransition>
     </TransitionGroup>
-    // </div>
   );
 }
 
