@@ -128,11 +128,26 @@ export default function NewPaletteForm(props) {
     setColor((st) => ({ ...st, colors: [] }));
   };
 
+  // mini helper
+  const checkDuplicateColor = (colorName) => {
+    return colors.colors.some((color) => color.name === colorName);
+  };
   const addRandomColor = () => {
-    const allColors = palettes.map((p) => p.colors).flat();
-    const rdindx = Math.floor(Math.random() * allColors.length);
-    let newColor = allColors[rdindx];
-    setColor((st) => ({
+    let allColors = [];
+    if (palettes.length === 0) {
+      allColors = seedColors.map((p) => p.colors).flat();
+    } else {
+      allColors = palettes.map((p) => p.colors).flat();
+    }
+    let rdindx;
+    let newColor;
+    let isDuplicateColor = true;
+    while (isDuplicateColor) {
+      rdindx = Math.floor(Math.random() * allColors.length);
+      newColor = allColors[rdindx];
+      isDuplicateColor = checkDuplicateColor(newColor.name);
+    }
+    return setColor((st) => ({
       ...st,
       colors: [...st.colors, newColor],
       colorName: "",

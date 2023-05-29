@@ -98,7 +98,7 @@ function App() {
             path="*"
             element={
               <Page>
-                <h1>This</h1>
+                <Home palettes={palettes} deletePalette={deletePalette} />
               </Page>
             }
           />
