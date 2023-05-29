@@ -73,6 +73,7 @@ export default function ColorPickerForm(props) {
       <ValidatorForm
         ref={form}
         onSubmit={addNewColor}
+        instantValidate={false}
         onError={(errors) => console.log(errors)}
       >
         <TextValidator

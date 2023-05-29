@@ -19,6 +19,7 @@ import Stack from "@mui/material/Stack";
 import DraggableColorList from "./DraggableColorList";
 import FormNav from "./FormNav";
 import ColorPickerForm from "./ColorPickerForm";
+import seedColors from "../../seeds/seedColors";
 
 const drawerWidth = 400;
 
@@ -85,7 +86,7 @@ export default function NewPaletteForm(props) {
   const { savePalette, palettes, maxColors } = props;
   const [colors, setColor] = useState({
     background: "#008080",
-    colors: palettes[0].colors,
+    colors: seedColors[0].colors,
     colorName: "",
     paletteName: "",
   });
